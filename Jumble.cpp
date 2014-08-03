@@ -124,5 +124,5 @@ int main() {
     getline(std::cin, word);
     Jumble jumbleGame;
     jumbleGame.jumbleWord(word);
-    return 1;
+    return 0;
 }
