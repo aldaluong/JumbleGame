@@ -22,8 +22,8 @@ static inline std::string &rtrim(std::string &s) {
     return s;
 }
 
-class Jumble
-{
+class Jumble {
+    
     std::ofstream outputFile;
     
     struct Dictionary
@@ -57,7 +57,10 @@ public:
 
 // --- permutes all letters of a word and looks up the word in the dictionary ---
 void Jumble::permuteWordAndCheckDictionary(std::string &word, int startIndex) {
+    
     int length = word.length();
+    
+    // tracks previous characters that were used for permutation
     char previousCharacters[256];
     memset(previousCharacters, 0, 256);
     
@@ -83,6 +86,7 @@ void Jumble::permuteWordAndCheckDictionary(std::string &word, int startIndex) {
 
 // --- Finds all combinations of a word then permutes and looks up the word in the dictionary ---
 void Jumble::generateWordCombinationPermuteAndCheckDictionary(std::string &inputWord, std::string outputWord, int startIndex) {
+    
     for (int i = startIndex; i < inputWord.length(); ++i) {
         outputWord.push_back(inputWord[i]);
         
@@ -90,6 +94,7 @@ void Jumble::generateWordCombinationPermuteAndCheckDictionary(std::string &input
         std::sort(outputWord.begin(), outputWord.end());
         permuteWordAndCheckDictionary(outputWord, 0);
         generateWordCombinationPermuteAndCheckDictionary(inputWord, outputWord, i+1);
+        
         outputWord.erase(outputWord.length()-1, 1);
         
         // avoid duplicate combinations
@@ -120,9 +125,11 @@ void Jumble::jumbleWord(std::string const& inputWord) {
 }
 
 int main() {
+    
     std::string word;
     getline(std::cin, word);
     Jumble jumbleGame;
     jumbleGame.jumbleWord(word);
+    
     return 0;
 }
